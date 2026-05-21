@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Minha Lista de Tarefas</h1>
+
+    <input type="text" id="tarefa" placeholder="Digite uma tarefa...">
+    <button id="botao" onclick="adicionarTarefa()">+ Adicionar</button>
+
+    <div class="container-lista">
+
+        <div class="filtros">
+            <button class="filtro ativo" data-filtro="todas">Todas</button>
+            <button class="filtro" data-filtro="pendentes">Pendentes</button>
+            <button class="filtro" data-filtro="concluidas">Concluídas</button>
+        </div>
+
+        <div id="grafico">
+            <ul id="lista"></ul>
+        </div>
+
+        <div class="rodapeLista">
+            <span id="infotarefas">0 tarefas de 0 concluídas</span>
+            <button id="btnLimpar" class="btnLimpar" data-filtro="todas">🗑 Limpar concluídas</button>
+        </div>
+
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>
