@@ -1,163 +1,260 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
-    background-color: #f185d4;
+/*RESET*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-#tarefa {
-    width: 400px;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    outline: none;
+body{
+    font-family:"Poppins",sans-serif;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
 }
 
-#botao {
-    padding: 12px 20px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: #4f46e5;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+/*CONTAINER*/
+
+.container{
+    width:100%;
+    max-width:850px;
 }
 
-#botao:hover {
-    background-color: #4338ca;
+/*HEADER*/
+
+.cabecalho{
+    text-align:center;
+    margin-bottom:35px;
 }
 
-.container-lista {
-    width: 600px;
-    margin: 50px auto 0;
+.cabecalho h1{
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
 }
 
-.filtros {
-    display: flex;
-    border: 1px solid rgb(240, 59, 195);
-    border-bottom: none;
-    border-radius: 20px 20px 0 0;
-    overflow: hidden;
-    background: white;
+.cabecalho h1 i{
+    color:#ffe66d;
+    margin-right:10px;
 }
 
-.filtro {
-    flex: 1;
-    padding: 18px;
-    background: rgb(240, 59, 195);
-    border-top: 1px solid rgb(240, 59, 195);
-    cursor: pointer;
-    font-size: 18px;
-    color: #ffffff;
-    position: relative;
+.cabecalho p{
+    color:#f1f1f1;
+    margin-top:8px;
+    font-size:17px;
 }
 
-.filtro:hover {
-    background-color: #000000;
+/*INPUT*/
+
+.adicionar{
+    display:flex;
+    gap:15px;
+    margin-bottom:30px;
 }
 
-.filtro.ativo {
-    color: #ffffff;
-    font-weight: bold;
+.input-box{
+    flex:1;
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border-radius:15px;
+    padding:0 18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-.filtro.ativo::after {
-    content: "";
-    position: absolute;
-    left: 20%;
-    bottom: 0;
-    width: 60%;
-    height: 3px;
-    background-color: #fefdff;
-    border-radius: 3px;
+.input-box i{
+    color:#999;
+    font-size:18px;
 }
 
-.rodapeLista {
-    padding: 15px;
-    border-top: 1px solid rgb(240, 59, 195);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(240, 59, 195);
-    border-radius: 0 0 20px 20px;
-
-    padding-top: 15px;
+#tarefa{
+    width:100%;
+    border:none;
+    outline:none;
+    padding:18px;
+    font-size:16px;
+    font-family:Poppins;
 }
 
-.btnLimpar {
-    background: transparent;
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.2s;
+#botao{
+    border:none;
+    border-radius:15px;
+    padding:0 28px;
+    background:#4f46e5;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 10px 20px rgba(79,70,229,.3);
 }
 
-.btnLimpar:hover {
-    background: #ef4444;
-    color: white;
+#botao:hover{
+    background:#4338ca;
+    transform:translateY(-2px);
 }
 
-#infotarefas {
-    color: #ffffff;
-    font-size: 14px;
+/*LISTA*/
+
+.container-lista{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
 }
 
+/*FILTROS*/
 
-#grafico {
-    min-height: 350px;
-    border: 0px;
-    border-top: none;
-    border-radius: 0 0 0 0;
-    padding: 20px;
-    box-sizing: border-box;
-    background: rgb(251, 209, 209);
+.filtros{
+    display:flex;
+    background:#f7f7f7;
+    border-bottom:1px solid #ececec;
 }
 
-#lista {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.filtro{
+    flex:1;
+    border:none;
+    background:none;
+    padding:18px;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.tarefa {
-    display: flex;
-    padding: 15px;
-    margin-bottom: 12px;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    text-align: left;
-    cursor: pointer;
-    background: rgb(0, 0, 0);
-    color: #ffffff
+.filtro i{
+    margin-right:8px;
 }
 
-.tarefa:hover {
-    background-color: #303030;
+.filtro:hover{
+    background:#efefef;
 }
 
-.tarefa.concluida {
-    text-decoration: line-through;
-    color: #ffffff;
-    background-color: #000000;
+.filtro.ativo{
+    background:#4f46e5;
+    color:#fff;
 }
 
-.btn-excluir {
-    margin-left: auto;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    font-size: 16px;
-    color: rgb(255, 255, 255);
+/*ÁREA DA LISTA*/
+
+#grafico{
+    min-height:420px;
+    padding:30px;
 }
 
-.btn-excluir {
-    transition: 0.2s;
+#grafico h2{
+    margin-bottom:20px;
+    color:#444;
 }
 
-.btn-excluir:hover {
-    transform: scale(1.3) rotate(10deg);
+#lista{
+    list-style:none;
+}
+
+/*TAREFAS*/
+
+.tarefa{
+    display:flex;
+    align-items:center;
+    background:#fafafa;
+    border:1px solid #ededed;
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:15px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.tarefa:hover{
+    background:#f3f3f3;
+    transform:translateY(-2px);
+}
+
+.tarefa span{
+    flex:1;
+}
+
+.tarefa.concluida{
+    opacity:.6;
+    text-decoration:line-through;
+}
+
+/*BOTÃO EXCLUIR*/
+
+.btn-excluir{
+    border:none;
+    background:none;
+    font-size:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn-excluir:hover{
+    transform:scale(1.25);
+}
+
+/*RODAPÉ*/
+
+.rodapeLista{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 30px;
+    background:#fafafa;
+    border-top:1px solid #ececec;
+}
+
+#infotarefas{
+    color:#666;
+    font-size:15px;
+}
+
+.btnLimpar{
+    border:none;
+    background:#ef4444;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.btnLimpar:hover{
+    background:#dc2626;
+}
+
+/*RESPONSIVO*/
+
+@media(max-width:700px){
+
+    body{
+        padding:20px;
+    }
+
+    .cabecalho h1{
+        font-size:30px;
+    }
+
+    .adicionar{
+        flex-direction:column;
+    }
+
+    #botao{
+        width:100%;
+        height:55px;
+    }
+
+    .rodapeLista{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .filtros{
+        flex-direction:column;
+    }
+
 }
