@@ -15,4 +15,4 @@ Aplicação web desenvolvida com HTML, CSS e JavaScript.
 
 ## Demonstração
 
-👉 https://seuusuario.github.io/lista-de-tarefas/
+👉 https://github.com/IagoBoracini/lista-tarefas/
