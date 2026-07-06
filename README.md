@@ -1,18 +1,24 @@
-# Lista de Tarefas
+# 📋 Lista de Tarefas
 
-Aplicação web desenvolvida com HTML, CSS e JavaScript.
+Aplicação web desenvolvida com HTML, CSS e JavaScript para gerenciamento de tarefas.
 
-## Tecnologias
+## 🚀 Demonstração
+
+🔗 Projeto online: (https://lista-tarefas-blue-one.vercel.app)
+
+## 💻 Tecnologias
+
 - HTML5
 - CSS3
 - JavaScript
+- LocalStorage
 
-## Funcionalidades
+## ✨ Funcionalidades
+
 - Adicionar tarefas
-- Marcar como concluída
-- Remover tarefas
-- Salvar automaticamente no navegador (LocalStorage)
+- Editar tarefas
+- Marcar como concluídas
+- Excluir tarefas
+- Persistência dos dados com LocalStorage
 
-## Demonstração
-
-👉 https://github.com/IagoBoracini/lista-tarefas/
+## 📷 Preview
