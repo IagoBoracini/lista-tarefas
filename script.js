@@ -1,115 +1,143 @@
-function criarTarefa(textoTarefa, concluida = false) {
+const input = document.getElementById("tarefa");
+const botao = document.getElementById("botao");
+const lista = document.getElementById("lista");
+const btnLimpar = document.getElementById("btnLimpar");
+const info = document.getElementById("infotarefas");
+const filtros = document.querySelectorAll(".filtro");
 
-        const item = document.createElement("li");
-    item.className = "tarefa";
-    if (concluida) {
-    item.classList.add("concluida");
-}
-    const texto = document.createElement("span");
-    texto.textContent = textoTarefa;
+// EVENTOS
 
-    const btnExcluir = document.createElement("button");
-    btnExcluir.textContent  = "🗑";
+botao.addEventListener("click", adicionarTarefa);
 
-    btnExcluir.classList.add("btn-excluir");
+input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        adicionarTarefa();
+    }
+});
 
-    btnExcluir.onclick = function(e) {
-        e.stopPropagation();
-        item.remove();
-        salvarTarefas();
-        atualizarInfoTarefas();
-    };
+btnLimpar.addEventListener("click", limparConcluidas);
 
-    item.appendChild(texto);
-    item.appendChild(btnExcluir);
+filtros.forEach(botao => {
+    botao.addEventListener("click", function () {
 
-    item.addEventListener("click", function () {
-        item.classList.toggle("concluida");
-        salvarTarefas();
-        atualizarInfoTarefas();
+        filtros.forEach(btn => btn.classList.remove("ativo"));
 
-        const filtroAtivo = document.querySelector(".filtro.ativo").dataset.filtro;
-        filtrarTarefas(filtroAtivo);
+        this.classList.add("ativo");
+
+        filtrarTarefas(this.dataset.filtro);
+
     });
+});
 
-    const lista = document.getElementById("lista");
-    lista.appendChild(item);
-    salvarTarefas();
-    atualizarInfoTarefas();
-
-}
+// ADICIONAR TAREFA
 
 function adicionarTarefa() {
 
-    const input = document.getElementById("tarefa");
+    const texto = input.value.trim();
 
-    if (input.value.trim() === "") {
+    if (texto === "") {
         alert("Digite uma tarefa!");
+        input.focus();
         return;
     }
 
-    criarTarefa(input.value);
+    criarTarefa(texto);
 
     input.value = "";
     input.focus();
 
-    const filtroAtivo = document.querySelector(".filtro.ativo").dataset.filtro;
-    filtrarTarefas(filtroAtivo);
+    aplicarFiltroAtual();
 }
 
-btnLimpar.addEventListener("click", function () {
-    const tarefas = document.querySelectorAll(".tarefa.concluida");
+// CRIAR TAREFA
 
-    if (tarefas.length === 0) {
-        alert("Nenhuma tarefa concluída!");
-        return;
+function criarTarefa(texto, concluida = false) {
+
+    const item = document.createElement("li");
+    item.className = "tarefa";
+
+    if (concluida) {
+        item.classList.add("concluida");
     }
 
-    if (confirm("Deseja remover todas as tarefas concluídas?")) {
-        tarefas.forEach(function (tarefa) {
-            tarefa.remove();
-            atualizarInfoTarefas();
-            salvarTarefas();
-        });
-    }
-});
+    const span = document.createElement("span");
+    span.textContent = texto;
 
-const filtros = document.querySelectorAll(".filtro");
+    const btnExcluir = document.createElement("button");
+    btnExcluir.className = "btn-excluir";
+    btnExcluir.innerHTML = `<i class="fa-regular fa-trash-can"></i>`;
 
-filtros.forEach(function (botao) {
-    botao.addEventListener("click", function () {
-        filtros.forEach(function (btn) {
-            btn.classList.remove("ativo");
-        });
+    btnExcluir.addEventListener("click", function (e) {
 
-        botao.classList.add("ativo");
-        filtrarTarefas(botao.dataset.filtro);
+        e.stopPropagation();
+
+        item.remove();
+
+        salvarTarefas();
+
+        atualizarInfoTarefas();
+
     });
-});
+
+    item.addEventListener("click", function () {
+
+        item.classList.toggle("concluida");
+
+        salvarTarefas();
+
+        atualizarInfoTarefas();
+
+        aplicarFiltroAtual();
+
+    });
+
+    item.appendChild(span);
+    item.appendChild(btnExcluir);
+
+    lista.appendChild(item);
+
+    salvarTarefas();
+
+    atualizarInfoTarefas();
+
+}
+
+// FILTROS
 
 function filtrarTarefas(filtro) {
-    const tarefas = document.querySelectorAll(".tarefa");
 
-    tarefas.forEach(function (tarefa) {
+    document.querySelectorAll(".tarefa").forEach(tarefa => {
+
         const concluida = tarefa.classList.contains("concluida");
 
-        if (filtro === "todas") {
-            tarefa.style.display = "flex";
-        } else if (filtro === "pendentes" && !concluida) {
-            tarefa.style.display = "flex";
-        } else if (filtro === "concluidas" && concluida) {
-            tarefa.style.display = "flex";
-        } else {
-            tarefa.style.display = "none";
+        switch (filtro) {
+
+            case "pendentes":
+                tarefa.style.display = concluida ? "none" : "flex";
+                break;
+
+            case "concluidas":
+                tarefa.style.display = concluida ? "flex" : "none";
+                break;
+
+            default:
+                tarefa.style.display = "flex";
+
         }
+
     });
+
 }
 
-document.getElementById("tarefa").addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-        adicionarTarefa();
-    }
-});
+function aplicarFiltroAtual() {
+
+    const filtro = document.querySelector(".filtro.ativo").dataset.filtro;
+
+    filtrarTarefas(filtro);
+
+}
+
+// CONTADOR
 
 function atualizarInfoTarefas() {
 
@@ -117,35 +145,73 @@ function atualizarInfoTarefas() {
 
     const concluidas = document.querySelectorAll(".tarefa.concluida").length;
 
-    const info = document.getElementById("infotarefas");
+    info.textContent = `${concluidas} de ${total} tarefas concluídas`;
 
-    info.textContent = `${concluidas} tarefas de ${total} concluídas`;
 }
+
+// LIMPAR CONCLUÍDAS
+
+function limparConcluidas() {
+
+    const concluidas = document.querySelectorAll(".tarefa.concluida");
+
+    if (concluidas.length === 0) {
+        alert("Nenhuma tarefa concluída.");
+        return;
+    }
+
+    if (!confirm("Deseja remover todas as tarefas concluídas?")) {
+        return;
+    }
+
+    concluidas.forEach(tarefa => tarefa.remove());
+
+    salvarTarefas();
+
+    atualizarInfoTarefas();
+
+}
+
+// LOCAL STORAGE
 
 function salvarTarefas() {
 
     const tarefas = [];
 
-    document.querySelectorAll(".tarefa").forEach(function(item) {
+    document.querySelectorAll(".tarefa").forEach(item => {
 
         tarefas.push({
+
             texto: item.querySelector("span").textContent,
+
             concluida: item.classList.contains("concluida")
+
         });
 
     });
 
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
+
 }
 
-window.onload = function() {
+function carregarTarefas() {
 
-    const tarefasSalvas = JSON.parse(localStorage.getItem("tarefas")) || [];
+    const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 
-    tarefasSalvas.forEach(function(tarefa) {
+    tarefas.forEach(tarefa => {
 
         criarTarefa(tarefa.texto, tarefa.concluida);
 
     });
 
-};
+}
+
+// INICIALIZAÇÃO
+
+window.addEventListener("DOMContentLoaded", function () {
+
+    carregarTarefas();
+
+    atualizarInfoTarefas();
+
+});
