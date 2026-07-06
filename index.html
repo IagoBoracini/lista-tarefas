@@ -1,36 +1,101 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Lista de Tarefas</title>
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Minha Lista de Tarefas</h1>
 
-    <input type="text" id="tarefa" placeholder="Digite uma tarefa...">
-    <button id="botao" onclick="adicionarTarefa()">+ Adicionar</button>
+    <main class="container">
 
-    <div class="container-lista">
+        <header class="cabecalho">
+            <h1>
+                <i class="fa-solid fa-list-check"></i>
+                Minha Lista de Tarefas
+            </h1>
 
-        <div class="filtros">
-            <button class="filtro ativo" data-filtro="todas">Todas</button>
-            <button class="filtro" data-filtro="pendentes">Pendentes</button>
-            <button class="filtro" data-filtro="concluidas">Concluídas</button>
-        </div>
+            <p>Organize seu dia de forma simples e eficiente.</p>
+        </header>
 
-        <div id="grafico">
-            <ul id="lista"></ul>
-        </div>
+        <section class="adicionar">
 
-        <div class="rodapeLista">
-            <span id="infotarefas">0 tarefas de 0 concluídas</span>
-            <button id="btnLimpar" class="btnLimpar" data-filtro="todas">🗑 Limpar concluídas</button>
-        </div>
+            <div class="input-box">
+                <i class="fa-solid fa-pen"></i>
 
-    </div>
- 
+                <input type="text" id="tarefa" placeholder="Digite uma nova tarefa...">
+            </div>
+
+            <button id="botao">
+                <i class="fa-solid fa-plus"></i>
+                Adicionar
+            </button>
+
+        </section>
+
+        <section class="container-lista">
+
+            <div class="filtros">
+
+                <button class="filtro ativo" data-filtro="todas">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Todas
+                </button>
+
+                <button class="filtro" data-filtro="pendentes">
+                    <i class="fa-regular fa-clock"></i>
+                    Pendentes
+                </button>
+
+                <button class="filtro" data-filtro="concluidas">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Concluídas
+                </button>
+
+            </div>
+
+            <div id="grafico">
+
+                <h2>Suas tarefas</h2>
+
+                <ul id="lista"></ul>
+
+            </div>
+
+            <footer class="rodapeLista">
+
+                <span id="infotarefas">
+                    0 tarefas de 0 concluídas
+                </span>
+
+                <button id="btnLimpar" class="btnLimpar">
+                    <i class="fa-regular fa-trash-can"></i>
+                    Limpar concluídas
+                </button>
+
+            </footer>
+
+        </section>
+
+    </main>
+
     <script src="script.js"></script>
+
 </body>
+
 </html>
